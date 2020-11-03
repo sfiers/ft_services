@@ -1,0 +1,16 @@
+FROM alpine:3.12.1
+
+RUN apk update && apk upgrade && apk add \
+    mysql\
+    openrc --no-cache \
+    mysql-client --update --no-cache
+
+COPY srcs/my.cnf /etc/mysql/
+RUN mysql_install_db
+
+
+# COPY srcs/start.sh /
+
+# EXPOSE 3306
+# ENTRYPOINT ["sh", "start.sh"]
+
