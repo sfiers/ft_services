@@ -14,3 +14,8 @@ RUN mysql_install_db
 # EXPOSE 3306
 # ENTRYPOINT ["sh", "start.sh"]
 
+https://gitlab.com/bccyv/ft_services/-/blob/master/srcs/mysql/start.sh
+https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
+https://linuxize.com/post/how-to-show-databases-in-mysql/
+https://www.thegeekdiary.com/understanding-the-different-configuration-files-used-for-mysql-server/
+https://dev.mysql.com/doc/refman/8.0/en/option-files.html
