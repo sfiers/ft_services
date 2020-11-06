@@ -1,0 +1,14 @@
+FROM alpine:3.12.1
+
+#PACKAGES
+RUN apk update && apk upgrade && apk add \
+    openrc --no-cache \
+    nginx\
+    influxdb
+
+#COPY
+COPY srcs/start.sh /tmp/start.sh
+
+#START
+RUN chmod 777 /tmp/start.sh
+CMD sh ./tmp/start.sh
