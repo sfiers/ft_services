@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: imagenginx
+        ports:
+        - containerPort: 80
+          name: http
+            # - containerPort: 443
+            #   name: https
+            # - containerPort: 22
+            #   name: ssh
+        imagePullPolicy: Never
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  type: LoadBalancer
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+    # - name: https
+    #   protocol: TCP
+    #   port: 443
+    #   targetPort: 443
+    # - name: ssh
+    #   protocol: TCP
+    #   port: 22
+    #   targetPort: 22
+  loadBalancerIP: 192.168.99.112
