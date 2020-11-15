@@ -5,7 +5,7 @@ docker rm -f $(docker ps -aq)
 # docker build -t mysql:0 ./srcs/mysql/
 # docker run --name mysql -it mysql:0
 
-docker build -t imagenginx:simon ./srcs/nginx/
+docker build -t imagenginx ./srcs/nginx/
 # docker run --name nginx -it -p 80:80 nginx:0
 
 # docker build -t phpmyadmin:0 ./srcs/phpmyadmin/

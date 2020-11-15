@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  # labels so that we can bind a Service to this Pod
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+      tier: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+        tier: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: imagemysql
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+        ports:
+          - containerPort: 3306
+            name: mysql
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+        name: mysql-mount
+        imagePullPolicy: Never
+      volumes:
+      - name: mysql-mount
+        persistentVolumeClaim:
+          claimName: pvc-mysql
+
+---
+
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: mysql-pv-volume
+#   labels:
+#     app: mysql
+# spec:
+#   storageClassName: manual
+#   capacity:
+#     storage: 0.5Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: "/home/user42/mount/data"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-mysql
+#   labels:
+#     app: mysql
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 0.2Gi
