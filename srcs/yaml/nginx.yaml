@@ -5,6 +5,7 @@ metadata:
   labels:
     app: nginx
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
@@ -17,8 +18,8 @@ spec:
       - name: nginx
         image: imagenginx
         ports:
-        - containerPort: 80
-          name: http
+        - name: http
+          containerPort: 80
             # - containerPort: 443
             #   name: https
             # - containerPort: 22
@@ -47,4 +48,4 @@ spec:
     #   protocol: TCP
     #   port: 22
     #   targetPort: 22
-  loadBalancerIP: 192.168.99.112
+  loadBalancerIP: 192.168.99.110

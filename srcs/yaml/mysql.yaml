@@ -52,8 +52,8 @@ spec:
 #   hostPath:
 #     path: "/home/user42/mount/data"
 ---
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: pvc-mysql
 #   labels:
@@ -66,17 +66,17 @@ spec:
     requests:
       storage: 0.2Gi
 
----
+# ---
 
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-    name: storage-class-mysql
-provisioner: kubernetes.io/aws-ebs
-parameters:
-    type: gp2
-reclaimPolicy: Retain
-allowVolumeExpansion: true
-mountOptions:
-    - debug
-volumeBindingMode: Immediate
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#     name: storage-class-mysql
+# provisioner: kubernetes.io/aws-ebs
+# parameters:
+#     type: gp2
+# reclaimPolicy: Retain
+# allowVolumeExpansion: true
+# mountOptions:
+#     - debug
+# volumeBindingMode: Immediate

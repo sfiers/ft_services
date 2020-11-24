@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin-deployment
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - name: phpmyadmin
+        image: imagephpmyadmin
+        ports:
+        - containerPort: 5000
+          name: phpmyadmin
+          # - containerPort: 443
+          #   name: pmahttps
+        imagePullPolicy: Never
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin-service
+spec:
+  selector:
+    app: phpmyadmin
+  type: LoadBalancer
+  ports:
+  - name: phpmyadmin
+    protocol: TCP
+    port: 5000
+    targetPort: 5000
+    # - name: pmahttps
+    #   protocol: TCP
+    #   port: 443
+    #   targetPort: 443
+  loadBalancerIP: 192.168.99.111

@@ -54,3 +54,15 @@ docker build -t imagenginx ./srcs/nginx/
 
 #nginx deployment and service
 kubectl apply -f ./srcs/yaml/nginx.yaml
+
+# echo "\n#------------------------------- PHPMYADMIN ----------------------------\n"
+
+#remove existing phpmyadmin image
+docker rmi imagephpmyadmin
+
+#buld nginx image
+docker build -t imagephpmyadmin ./srcs/phpmyadmin/
+
+#nginx deployment and service
+kubectl apply -f ./srcs/yaml/imagephpmyadmin.yaml
+# kubectl apply -f srcs/yaml/phpmyadmin.yaml
